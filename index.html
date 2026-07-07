@@ -1,0 +1,427 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日常英语·第一课：去外婆家的路上</title>
+<style>
+  :root {
+    --primary: #4F46E5;
+    --primary-light: #818CF8;
+    --bg: #F8FAFC;
+    --card-bg: #FFFFFF;
+    --text: #1E293B;
+    --text-light: #64748B;
+    --success: #10B981;
+    --warning: #F59E0B;
+    --border: #E2E8F0;
+    --shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding-bottom: 60px;
+  }
+  .header {
+    background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+    color: white;
+    padding: 48px 20px 36px;
+    text-align: center;
+  }
+  .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+  .header p { font-size: 15px; opacity: 0.9; }
+  .header .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+  .progress-bar {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .progress-step {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-light);
+  }
+  .progress-step .num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+  }
+  .progress-step.active .num { background: var(--primary); color: white; }
+  .progress-step.active { color: var(--primary); font-weight: 600; }
+  .container { max-width: 720px; margin: 0 auto; padding: 20px 16px; }
+  .section {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 24px 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .step-badge {
+    background: var(--primary);
+    color: white;
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+  .section-sub { font-size: 14px; color: var(--text-light); margin-bottom: 16px; }
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+  }
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+  .tip {
+    background: #EEF2FF;
+    border-left: 4px solid var(--primary);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin: 12px 0;
+    color: #4338CA;
+  }
+  .tip.orange { background: #FFFBEB; border-left-color: var(--warning); color: #92400E; }
+  .tip.green { background: #ECFDF5; border-left-color: var(--success); color: #065F46; }
+  .transcript {
+    background: #F1F5F9;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-top: 12px;
+  }
+  .transcript .en { font-weight: 600; }
+  .transcript .zh { color: var(--text-light); }
+  .transcript .line {
+    margin-bottom: 8px; padding-bottom: 8px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .transcript .line:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .vocab-card {
+    background: #F8FAFC;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    transition: transform 0.2s;
+  }
+  .vocab-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .vocab-card .word { font-size: 17px; font-weight: 700; color: var(--primary); }
+  .vocab-card .pron { font-size: 13px; color: var(--text-light); margin: 2px 0; }
+  .vocab-card .meaning { font-size: 14px; }
+  .fill-exercise {
+    background: #FFFBEB;
+    border: 2px dashed #F59E0B;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 12px;
+  }
+  .fill-exercise .en-text { font-size: 15px; line-height: 2; }
+  .fill-exercise .blank {
+    display: inline-block;
+    min-width: 80px;
+    border-bottom: 2px solid var(--primary);
+    color: var(--primary);
+    font-weight: 600;
+    padding: 0 4px;
+    cursor: pointer;
+  }
+  .fill-exercise .blank.filled { color: var(--success); border-color: var(--success); }
+  .fill-exercise .hint { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+  .answer-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background 0.2s;
+  }
+  .answer-btn:hover { background: #4338CA; }
+  .answer-key { display: none; margin-top: 12px; padding: 16px; background: #ECFDF5; border-radius: 10px; font-size: 14px; }
+  .answer-key.show { display: block; }
+  .audio-player {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #F1F5F9;
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin: 12px 0;
+  }
+  .audio-player audio { flex: 1; }
+  .nav-buttons { display: flex; justify-content: space-between; margin-top: 24px; }
+  .nav-btn {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+  .nav-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .nav-btn.primary { background: var(--primary); color: white; border-color: var(--primary); }
+  .nav-btn.primary:hover { background: #4338CA; }
+  .footer { text-align: center; padding: 20px; color: var(--text-light); font-size: 13px; }
+  .footer .brand { color: var(--primary); font-weight: 600; }
+  @media (max-width: 480px) {
+    .header h1 { font-size: 22px; }
+    .section { padding: 18px 14px; }
+    .vocab-grid { grid-template-columns: 1fr; }
+    .progress-step { font-size: 11px; }
+    .progress-step .num { width: 20px; height: 20px; font-size: 10px; }
+  }
+  .scroll-top {
+    position: fixed; bottom: 20px; right: 20px;
+    width: 44px; height: 44px;
+    border-radius: 50%; background: var(--primary); color: white;
+    border: none; font-size: 20px; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(79,70,229,0.3);
+    display: none; z-index: 100;
+  }
+  .scroll-top.show { display: block; }
+  .check-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; }
+  .check-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--primary); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🌄 日常英语 · 第一课</h1>
+  <p>去外婆家的路上 — 边走边学10个实用单词</p>
+  <span class="badge">📺 YouTube 可理解输入 · 零基础友好</span>
+</div>
+
+<div class="progress-bar" id="progressBar">
+  <div class="progress-step active" data-step="1"><span class="num">1</span> 看视频·英文字幕</div>
+  <span style="color:var(--border)">→</span>
+  <div class="progress-step" data-step="2"><span class="num">2</span> 中英对照</div>
+  <span style="color:var(--border)">→</span>
+  <div class="progress-step" data-step="3"><span class="num">3</span> 盲听</div>
+  <span style="color:var(--border)">→</span>
+  <div class="progress-step" data-step="4"><span class="num">4</span> 重点词汇</div>
+  <span style="color:var(--border)">→</span>
+  <div class="progress-step" data-step="5"><span class="num">5</span> 填空挑战</div>
+</div>
+
+<div class="container">
+  <!-- STEP 1 -->
+  <div class="section" id="step1">
+    <div class="section-title"><span class="step-badge">Step 1</span> 📖 看视频 · 英文字幕</div>
+    <div class="section-sub">先看一遍带英文字幕的视频，了解大概内容，不用着急全部听懂。</div>
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/dwEpmwk6YF8?rel=0&showinfo=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="tip">💡 <strong>学习建议：</strong>第一遍只看英文字幕，关注画面和文字的对应关系。看到不认识的单词先猜意思，不要查字典。</div>
+    <div class="tip orange">🎯 <strong>本课10个目标单词：</strong> fridge（冰箱）, sofa（沙发）, tree（树）, grass（草）, window（窗户）, clouds（云）, sky（天空）, leaf（叶子）, lemon（柠檬）, machete（砍刀）</div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="section" id="step2">
+    <div class="section-title"><span class="step-badge">Step 2</span> 🔄 中英对照看视频</div>
+    <div class="section-sub">一边看一边对照中文翻译，理解每个句子的意思。</div>
+    <p style="margin-bottom:12px;font-size:14px;color:var(--text-light);">以下是视频中的核心对话，一句英文一句中文对照：</p>
+    <div class="transcript">
+      <div class="line"><div class="en">The fridge is in the corner of the room.</div><div class="zh">🧊 冰箱在房间的角落里。</div></div>
+      <div class="line"><div class="en">Window with sun coming in.</div><div class="zh">🪟 阳光透过窗户照进来。</div></div>
+      <div class="line"><div class="en">A sofa that you sit on.</div><div class="zh">🛋️ 你坐的沙发。</div></div>
+      <div class="line"><div class="en">I'm sitting down on the sofa.</div><div class="zh">我正坐在沙发上。</div></div>
+      <div class="line"><div class="en">Close the door.</div><div class="zh">🚪 把门关上。</div></div>
+      <div class="line"><div class="en">My shoes are not here.</div><div class="zh">👟 我的鞋子不在这里。</div></div>
+      <div class="line"><div class="en">This bird is called a peacock. A peacock with the feathers.</div><div class="zh">🦚 这只鸟叫孔雀。有羽毛的孔雀。</div></div>
+      <div class="line"><div class="en">The gate is closed. Open the gate.</div><div class="zh">🚧 大门是关着的。打开门。</div></div>
+      <div class="line"><div class="en">This is a lemon. Sour fruit.</div><div class="zh">🍋 这是柠檬。很酸的水果。</div></div>
+      <div class="line"><div class="en">Look at the view. Mountains, clouds, sky.</div><div class="zh">🏔️ 看这景色。山、云、天空。</div></div>
+      <div class="line"><div class="en">I like hiking. I like mountains.</div><div class="zh">🥾 我喜欢徒步。我喜欢山。</div></div>
+      <div class="line"><div class="en">This is a waterfall. Lots of water.</div><div class="zh">💧 这是瀑布。好多水。</div></div>
+      <div class="line"><div class="en">This is corn. Corn fields.</div><div class="zh">🌽 这是玉米。玉米地。</div></div>
+      <div class="line"><div class="en">This fruit is red and has a sweet flavor. Let's try it. It's good!</div><div class="zh">🍓 这水果是红色的，有甜味。尝尝看。好吃！</div></div>
+    </div>
+    <div class="tip" style="margin-top:16px;">💡 现在回头再看一遍视频，试试能不能听出上面这些句子的对应位置。</div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="section" id="step3">
+    <div class="section-title"><span class="step-badge">Step 3</span> 🎧 盲听挑战</div>
+    <div class="section-sub">不看画面，纯听声音，检测你的耳朵跟上了多少。</div>
+    <div class="tip green">✅ 盲听是可选步骤，如果前两步还没消化好，可以先跳过，回头再来挑战！</div>
+    <div class="audio-player">
+      <span>🎵</span>
+      <audio controls><source src="https://www.youtube.com/watch?v=dwEpmwk6YF8" type="audio/mp4">你的浏览器不支持音频播放</audio>
+      <span style="font-size:13px;color:var(--text-light);">纯音频</span>
+    </div>
+    <div class="tip orange" style="margin-top:12px;">🧘‍♀️ <strong>盲听技巧：</strong>闭上眼睛，专注听声音。不要追求100%听懂，能捕捉到几个关键词就算进步！</div>
+    <div style="margin-top:12px;">
+      <p style="font-size:14px;font-weight:600;margin-bottom:8px;">👇 听完后自我评估：</p>
+      <div class="check-item"><input type="checkbox" id="c1"> <label for="c1">我能听出 0-3 个今天学的单词</label></div>
+      <div class="check-item"><input type="checkbox" id="c2"> <label for="c2">我能听出 4-6 个单词</label></div>
+      <div class="check-item"><input type="checkbox" id="c3"> <label for="c3">我能听出 7-10 个单词</label></div>
+      <div class="check-item"><input type="checkbox" id="c4"> <label for="c4">我基本能听出大部分内容</label></div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="section" id="step4">
+    <div class="section-title"><span class="step-badge">Step 4</span> 📝 重点词汇积累</div>
+    <div class="section-sub">本课需要掌握的单词和短语（中文释义在下面，先考考自己再看答案）</div>
+    <p style="font-size:15px;font-weight:600;margin:0 0 8px;">🎯 核心词汇</p>
+    <div class="vocab-grid">
+      <div class="vocab-card"><div class="word">fridge</div><div class="pron">/frɪdʒ/</div><div class="meaning">🧊 冰箱</div></div>
+      <div class="vocab-card"><div class="word">sofa</div><div class="pron">/ˈsoʊfə/</div><div class="meaning">🛋️ 沙发</div></div>
+      <div class="vocab-card"><div class="word">tree</div><div class="pron">/triː/</div><div class="meaning">🌲 树</div></div>
+      <div class="vocab-card"><div class="word">grass</div><div class="pron">/ɡræs/</div><div class="meaning">🌿 草</div></div>
+      <div class="vocab-card"><div class="word">window</div><div class="pron">/ˈwɪndoʊ/</div><div class="meaning">🪟 窗户</div></div>
+      <div class="vocab-card"><div class="word">clouds</div><div class="pron">/klaʊdz/</div><div class="meaning">☁️ 云</div></div>
+      <div class="vocab-card"><div class="word">sky</div><div class="pron">/skaɪ/</div><div class="meaning">🌤️ 天空</div></div>
+      <div class="vocab-card"><div class="word">leaf</div><div class="pron">/liːf/</div><div class="meaning">🍃 叶子</div></div>
+      <div class="vocab-card"><div class="word">lemon</div><div class="pron">/ˈlemən/</div><div class="meaning">🍋 柠檬</div></div>
+      <div class="vocab-card"><div class="word">machete</div><div class="pron">/məˈʃeti/</div><div class="meaning">🔪 砍刀</div></div>
+    </div>
+    <p style="font-size:15px;font-weight:600;margin:16px 0 8px;">📌 补充词汇</p>
+    <div class="vocab-grid">
+      <div class="vocab-card"><div class="word">doorway</div><div class="pron">/ˈdɔːrweɪ/</div><div class="meaning">🚪 门口</div></div>
+      <div class="vocab-card"><div class="word">peacock</div><div class="pron">/ˈpiːkɑːk/</div><div class="meaning">🦚 孔雀</div></div>
+      <div class="vocab-card"><div class="word">gate</div><div class="pron">/ɡeɪt/</div><div class="meaning">🚧 大门</div></div>
+      <div class="vocab-card"><div class="word">waterfall</div><div class="pron">/ˈwɔːtərfɔːl/</div><div class="meaning">💧 瀑布</div></div>
+      <div class="vocab-card"><div class="word">mountain</div><div class="pron">/ˈmaʊntɪn/</div><div class="meaning">⛰️ 山</div></div>
+      <div class="vocab-card"><div class="word">corn</div><div class="pron">/kɔːrn/</div><div class="meaning">🌽 玉米</div></div>
+      <div class="vocab-card"><div class="word">sour</div><div class="pron">/ˈsaʊər/</div><div class="meaning">酸的味道</div></div>
+      <div class="vocab-card"><div class="word">sweet</div><div class="pron">/swiːt/</div><div class="meaning">甜的</div></div>
+      <div class="vocab-card"><div class="word">trail</div><div class="pron">/treɪl/</div><div class="meaning">🥾 小径</div></div>
+      <div class="vocab-card"><div class="word">view</div><div class="pron">/vjuː/</div><div class="meaning">🏞️ 景色</div></div>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="section" id="step5">
+    <div class="section-title"><span class="step-badge">Step 5</span> ✍️ 挖空填空挑战</div>
+    <div class="section-sub">看看你能不能回忆起这些单词！根据中文提示，填入正确的英文。</div>
+    <div class="fill-exercise">
+      <p style="font-weight:600;margin-bottom:12px;">📝 点击空白处显示答案：</p>
+      <div class="en-text">1. The <span class="blank" onclick="toggleAnswer(1)" data-answer="fridge">______</span> is in the corner of the room. <span class="hint">🧊 冰箱</span></div>
+      <div class="en-text">2. A <span class="blank" onclick="toggleAnswer(2)" data-answer="sofa">______</span> that you sit on. <span class="hint">🛋️ 沙发</span></div>
+      <div class="en-text">3. The <span class="blank" onclick="toggleAnswer(3)" data-answer="tree">______</span> has many leaves. <span class="hint">🌲 树</span></div>
+      <div class="en-text">4. This is not weeds, this is <span class="blank" onclick="toggleAnswer(4)" data-answer="grass">______</span>. <span class="hint">🌿 草</span></div>
+      <div class="en-text">5. The sun comes in through the <span class="blank" onclick="toggleAnswer(5)" data-answer="window">______</span>. <span class="hint">🪟 窗户</span></div>
+      <div class="en-text">6. The white part in the sky is <span class="blank" onclick="toggleAnswer(6)" data-answer="clouds">______</span>. <span class="hint">☁️ 云</span></div>
+      <div class="en-text">7. The blue part is the <span class="blank" onclick="toggleAnswer(7)" data-answer="sky">______</span>. <span class="hint">🌤️ 天空</span></div>
+      <div class="en-text">8. Trees have <span class="blank" onclick="toggleAnswer(8)" data-answer="leaves">______</span> (plural). <span class="hint">🍃 叶子（复数）</span></div>
+      <div class="en-text">9. This fruit is a <span class="blank" onclick="toggleAnswer(9)" data-answer="lemon">______</span>. It's sour. <span class="hint">🍋 柠檬</span></div>
+      <div class="en-text">10. We use a <span class="blank" onclick="toggleAnswer(10)" data-answer="machete">______</span> to cut the branches. <span class="hint">🔪 砍刀</span></div>
+      <button class="answer-btn" onclick="showAllAnswers()">📋 显示全部答案</button>
+      <div class="answer-key" id="answerKey">
+        <p><strong>✅ 参考答案：</strong></p>
+        <p>1. fridge | 2. sofa | 3. tree | 4. grass | 5. window</p>
+        <p>6. clouds | 7. sky | 8. leaves | 9. lemon | 10. machete</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-buttons">
+    <button class="nav-btn" onclick="scrollToStep('step1')">⏮ 回到第1步</button>
+    <button class="nav-btn primary" onclick="scrollToStep('step1')">🔄 再看一遍视频</button>
+  </div>
+</div>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<div class="footer">
+  <p>📚 <span class="brand">日常英语 · 第一课</span> | 去外婆家的路上</p>
+  <p style="margin-top:4px;">点击即学 · 零基础友好 · 每天进步一点点</p>
+</div>
+
+<script>
+window.addEventListener('scroll', function() {
+  document.getElementById('scrollTop').classList.toggle('show', window.scrollY > 300);
+});
+function scrollToStep(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+function toggleAnswer(num) {
+  const blanks = document.querySelectorAll('.blank');
+  const blank = blanks[num - 1];
+  if (blank.classList.contains('filled')) {
+    blank.textContent = '______';
+    blank.classList.remove('filled');
+  } else {
+    blank.textContent = blank.dataset.answer;
+    blank.classList.add('filled');
+  }
+}
+function showAllAnswers() {
+  const blanks = document.querySelectorAll('.blank');
+  blanks.forEach((b, i) => {
+    b.textContent = b.dataset.answer;
+    b.classList.add('filled');
+  });
+  document.getElementById('answerKey').classList.add('show');
+}
+const sections = ['step1','step2','step3','step4','step5'];
+const progressSteps = document.querySelectorAll('.progress-step');
+function updateProgress() {
+  let currentStep = 0;
+  sections.forEach((id, index) => {
+    const el = document.getElementById(id);
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight / 2) currentStep = index + 1;
+  });
+  progressSteps.forEach((step, index) => {
+    step.classList.remove('active','done');
+    if (index + 1 < currentStep) step.classList.add('done');
+    else if (index + 1 === currentStep) step.classList.add('active');
+  });
+}
+window.addEventListener('scroll', updateProgress);
+updateProgress();
+</script>
+</body>
+</html>
